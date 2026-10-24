@@ -1,0 +1,8 @@
+{
+  "name": "tripguide",
+  "version": "1.0.0",
+  "description": "Responsive India travel discovery and budget planner",
+  "main": "server.js",
+  "scripts": {"start": "node server.js"},
+  "dependencies": {"express": "^4.21.2"}
+}

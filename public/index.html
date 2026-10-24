@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Discover destinations across India, check weather, and plan your trip budget with TripGuide.">
+<title>TripGuide — Your Journey, Our Guidance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="#home" aria-label="TripGuide home">
+    <span class="brand-icon">△</span>Trip<span>Guide</span></a>
+<nav id="mainNav"><a href="#home">Home</a>
+    <a href="#explore">Explore</a>
+    <a href="#planner">Budget Planner</a>
+    <a href="#vlogs">Mini Vlogs</a>
+    <a href="#guides">Travel Guides</a>
+    <a href="#ask">Ask TripGuide</a>
+</nav>
+</header>
+<main>
+<section class="hero" id="home">
+    <div class="hero-shade"></div>
+    <div class="hero-content">
+        <p class="eyebrow">GO BEYOND THE ORDINARY ✦</p>
+        <h1>The world is wide.<br><span>Your story awaits.</span></h1>
+        <p class="hero-copy">Find places that move you, plan journeys that fit your budget, and make every mile meaningful.</p>
+        <a class="button button-gold" href="#explore">Explore destinations <span>→</span></a>
+        <div class="hero-note">✧ Collect moments, not just miles.</div></div>
+        <div class="hero-stats"><div><b>Incredible India</b><span>One journey at a time</span></div>
+        <div><b>Plan smarter</b><span>Budget-friendly ideas</span></div>
+        <div><b>Travel curious</b><span>Discover something new</span></div></div>
+    </section>
+    <br>
+    <section class="search-band" ><div><p class="eyebrow">ALREADY HAVE A PLACE IN MIND?</p>
+    <h2>Go straight to your <span>destination.</span></h2></div>
+    <form id="placeSearch" class="search-form"><span>⌕</span>
+        <input id="searchInput" placeholder="Search a place, state, or experience…" aria-label="Search destinations">
+        <button class="button button-blue">Search</button></form>
+    <div id="searchResults"></div>
+    </section>
+
+<section class="section explore-section" id="explore"><div class="section-heading"><div><p class="eyebrow">YOUR NEXT CHAPTER</p>
+    <h2>Find your kind of <span>escape.</span></h2>
+    <p class="muted">Start with a feeling. We'll help you find the place.</p></div>
+    <div class="result-count" id="resultCount">Showing handpicked places</div></div>
+<div class="filters"><label>Travel style<select id="categoryFilter">
+    <option value="all">All categories</option>
+    <option value="Adventure">Adventure</option><option value="Nature">Nature & peace</option>
+    <option value="Historical">Historical</option><option value="Spiritual">Spiritual</option>
+    <option value="Beach">Beach</option><option value="Wildlife">Wildlife</option>
+    <option value="Trekking">Trekking</option></select></label>
+    <label>State / region<select id="stateFilter"><option value="all">All states</option></select></label>
+    <label>Maximum budget (per person)<select id="budgetFilter">
+        <option value="all">Any budget</option><option value="2000">Up to ₹2,000</option>
+        <option value="5000">Up to ₹5,000</option><option value="10000">Up to ₹10,000</option>
+        <option value="20000">Up to ₹20,000</option></select></label>
+        <button class="button button-blue" id="applyFilters">Apply filters ↗</button>
+        <button class="clear-button" id="clearFilters">Reset</button></div>
+        <div id="destinationGrid" class="destination-grid"></div>
+
+
+<div id="loadMoreWrap" class="load-more-wrap hidden">
+    <button id="loadMore" class="button button-blue" type="button">
+        Load More Places
+    </button>
+</div>
+
+<p id="emptyState" class="empty-state hidden">
+    No places match these filters. Try a different category or budget.
+</p>
+
+</section>
+
+
+<section class="section planner-section" id="planner"><div class="section-heading">
+    <div><p class="eyebrow">MAKE EVERY RUPEE COUNT</p>
+        <h2>Your trip, your <span>budget.</span></h2>
+        <p class="muted">Get an indicative cost breakdown before you go.</p></div>
+        <span class="section-icon">₹</span></div>
+<div class="planner-layout"><form class="planner-form" id="budgetForm">
+    <label>Starting city<input id="origin" required placeholder="e.g. Varanasi"></label>
+    <label>Destination<input id="destinationInput" required placeholder="e.g. Manali"></label>
+    <label>Travellers<input id="people" type="number" min="1" max="30" value="2" required></label>
+    <label>Trip duration (days)<input id="days" type="number" min="1" max="60" value="3" required></label>
+    <label>Transport<select id="transport"><option value="train">Train</option>
+        <option value="bus">Bus</option><option value="flight">Flight</option>
+        <option value="car">Car / taxi</option><option value="bike">Bike</option>
+    </select></label>
+    <label>Stay preference<select id="stay"><option value="budget">Dharamshala / budget stay</option>
+        <option value="hotel">Standard hotel</option><option value="comfort">Comfort hotel</option>
+        <option value="hostel">Hostel</option><option value="camp">Camping / homestay</option></select></label>
+        <label class="wide">Travel style<select id="tripStyle"><option value="balanced">Balanced trip</option>
+            <option value="budget">Keep it economical</option>
+            <option value="comfort">Comfort focused</option></select></label>
+            <button class="button button-blue wide" type="submit">Calculate my budget <span>→</span></button></form>
+<div class="budget-result" id="budgetResult"><div class="result-top"><span class="result-icon">✦</span>
+    <div><b>Your estimate awaits</b><p>Fill in your trip details to get started.</p></div></div>
+    <div class="budget-placeholder">Your personalized cost breakdown will appear here.</div>
+    <p class="fine-print">Estimates only. Prices vary by season, route, availability, and booking time. Confirm costs with travel providers.</p>
+</div></div></section>
+<br><br>
+<section class="section vlog-section" id="vlogs"><div class="section-heading">
+    <div><p class="eyebrow">TRAVEL THROUGH THEIR EYES</p>
+        <h2>Little clips. Big <span>memories.</span></h2>
+        <p class="muted">Browse traveller stories or add a link to your own mini vlog.</p></div>
+        <button class="button button-outline" id="showVlogForm">＋ Share a vlog</button></div>
+        <form id="vlogForm" class="vlog-form hidden"><label>Vlog title<input id="vlogTitle" required maxlength="80" placeholder="A sunrise I'll never forget"></label>
+            <label>Destination<input id="vlogPlace" list="placeList" required maxlength="60" placeholder="Rishikesh"></label>
+            <datalist id="placeList"></datalist>
+            <label>Video URL (optional)<input id="vlogUrl" type="url" placeholder="https://…"></label>
+            <button class="button button-blue">Post vlog</button>
+            <p class="fine-print">Demo posts are saved in this browser. Video URLs are not uploaded to TripGuide.</p>
+        </form><div class="vlog-grid" id="vlogGrid"></div></section>
+<section class="guide-strip" id="guides"><div class="guide-art">✧</div>
+    <div><p class="eyebrow">A LITTLE LOCAL KNOW-HOW</p><h2>Travel well. Leave a lighter footprint.</h2>
+        <p>Pack for the season, respect local customs, carry reusable essentials, check official advisories, and book with verified providers. Mountain and wildlife areas may have permit or entry rules.</p></div>
+        <a class="button button-gold" href="#explore">Explore travel guides →</a></section>
+<section class="section ask-section" id="ask"><div class="ask-copy"><p class="eyebrow">YOUR TRAVEL SIDEKICK</p>
+    <h2>Have a question? <span>Ask TripGuide.</span></h2>
+    <p class="muted">Ask for ideas on destinations, seasons, packing, or budget planning. This demo assistant gives basic guidance, not professional or live booking advice.</p>
+    <div class="suggestions"><button data-question="Suggest a budget-friendly mountain trip">Budget mountain trip</button>
+        <button data-question="What should I pack for a monsoon trip?">Monsoon packing</button>
+        <button data-question="Suggest a 3-day nature trip">3-day nature escape</button></div>
+    </div><div class="chat-card"><div class="chat-head"><span class="bot-avatar">✦</span>
+        <div><b>TripGuide Assistant</b><small><span class="status-dot"></span> Travel ideas · Demo mode</small></div></div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="bot-message">Hello, explorer! 🌍 Tell me what kind of trip you're dreaming of, your budget, or what you'd like to know.</div></div>
+            <form id="chatForm" class="chat-form"><input id="chatInput" placeholder="Ask about your next trip…" aria-label="Ask TripGuide" required>
+                <button aria-label="Send message">➤</button></form>
+            </div></section>
+</main>
+<footer class="footer"><div class="footer-main">
+    <div class="footer-brand"><a class="brand" href="#home">
+        <span class="brand-icon">△</span>Trip<span>Guide</span></a>
+        <p>Your journey, our guidance.<br>Make the most of every mile.</p></div>
+        <div><b>Explore</b><a href="#explore">Destinations</a><a href="#weather">Weather</a>
+            <a href="#planner">Budget planner</a></div><div><b>Get inspired</b>
+                <a href="#vlogs">Mini vlogs</a><a href="#guides">Travel guides</a><a href="#ask">Ask TripGuide</a></div>
+                <div><b>Stay in the loop</b><p>Travel inspiration, occasionally.</p>
+                    <form id="newsletterForm" class="newsletter">
+                        <input type="email" id="newsletterEmail" required placeholder="Your email address">
+                        <button aria-label="Subscribe">→</button></form><small id="newsletterMessage"></small></div></div>
+                        <div class="footer-bottom"><span>© <span id="year"></span> TripGuide. Travel thoughtfully.</span>
+                            <span>Built for curious travellers across India.</span><a href="#home">Back to top ↑</a></div>
+                        </footer>
+<div class="modal hidden" id="destinationModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" data-close="true"></div><div class="modal-panel">
+        <button class="modal-close" id="closeModal" aria-label="Close destination details">×</button>
+        <div id="modalContent"></div></div></div>
+<div class="toast" id="toast" role="status"></div>
+<script src="destinations.js"></script><script src="app.js"></script>
+</body></html>
