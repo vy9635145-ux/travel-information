@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # TripGuide
 
 A responsive travel discovery website built with HTML, CSS, and vanilla JavaScript, with an optional Node/Express local server.
@@ -35,3 +36,7 @@ Full name list: `public/images/IMAGE_LIST.txt`.
 
 ## Accuracy notes
 Transport, lodging, meals and activity budgets are indicative planning ranges, not live ticket or hotel quotes. Check providers before booking. Weather is sourced from Open-Meteo and depends on forecast availability. Ratings and vlog posts are stored in this browser only. The Ask TripGuide assistant is a local demo and is not connected to an AI API.
+=======
+# travel-information
+AI-powered travel guide for exploring destinations, discovering local food, planning budgets, and creating personalized travel itineraries.
+>>>>>>> 2554b59554db6c4233045fe538cd92bc05ff6916
