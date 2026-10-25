@@ -183,3 +183,61 @@
 .live-weather p{margin:6px 0 0}.live-weather small{display:block;margin-top:8px;color:var(--muted)}
 
 .load-more-wrap{text-align:center;margin:28px 0 8px}
+
+
+.api-search-heading {
+  margin: 28px 0 16px;
+  color: var(--ink, #17324d);
+}
+
+.api-place-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.api-place-card {
+  overflow: hidden;
+  border: 1px solid var(--line, #dce4eb);
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(24, 53, 82, 0.06);
+}
+
+.api-place-image {
+  display: block;
+  height: 210px;
+  background: #e8eef3;
+}
+
+.api-place-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.api-place-body {
+  padding: 16px;
+}
+
+.api-place-body h3 {
+  margin: 0 0 8px;
+}
+
+.api-place-body p {
+  margin: 6px 0;
+  overflow-wrap: anywhere;
+}
+
+.api-place-rating {
+  font-weight: 700;
+}
+
+.api-photo-attribution {
+  display: block;
+  margin-top: 10px;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}

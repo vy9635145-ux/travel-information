@@ -107,13 +107,65 @@
         <h2>Little clips. Big <span>memories.</span></h2>
         <p class="muted">Browse traveller stories or add a link to your own mini vlog.</p></div>
         <button class="button button-outline" id="showVlogForm">＋ Share a vlog</button></div>
-        <form id="vlogForm" class="vlog-form hidden"><label>Vlog title<input id="vlogTitle" required maxlength="80" placeholder="A sunrise I'll never forget"></label>
-            <label>Destination<input id="vlogPlace" list="placeList" required maxlength="60" placeholder="Rishikesh"></label>
-            <datalist id="placeList"></datalist>
-            <label>Video URL (optional)<input id="vlogUrl" type="url" placeholder="https://…"></label>
-            <button class="button button-blue">Post vlog</button>
-            <p class="fine-print">Demo posts are saved in this browser. Video URLs are not uploaded to TripGuide.</p>
-        </form><div class="vlog-grid" id="vlogGrid"></div></section>
+       
+<form id="vlogForm" class="vlog-form hidden">
+  <label>
+    Vlog title
+    <input
+      id="vlogTitle"
+      name="title"
+      required
+      maxlength="200"
+      placeholder="A sunrise I'll never forget"
+    >
+  </label>
+
+  <label>
+    Destination
+    <input
+      id="vlogPlace"
+      name="location"
+      list="placeList"
+      required
+      maxlength="100"
+      placeholder="Agra"
+    >
+  </label>
+
+  <datalist id="placeList"></datalist>
+
+  <label>
+    Description
+    <textarea
+      id="vlogDescription"
+      name="description"
+      maxlength="5000"
+      placeholder="Tell us about your journey"
+    ></textarea>
+  </label>
+
+  <label>
+    Upload video (MP4, WebM or MOV; max 100 MB)
+    <input
+      id="vlogVideo"
+      name="video"
+      type="file"
+      accept="video/mp4,video/webm,video/quicktime,video/x-m4v"
+      required
+    >
+  </label>
+
+  <button class="button button-blue" type="submit">
+    Upload vlog
+  </button>
+
+  <p class="fine-print">
+    Your vlog will be saved through the Yatra AI backend.
+  </p>
+</form>
+
+<div class="vlog-grid" id="vlogGrid"></div>
+<div class="vlog-grid" id="vlogGrid"></div></section>
 <section class="guide-strip" id="guides"><div class="guide-art">✧</div>
     <div><p class="eyebrow">A LITTLE LOCAL KNOW-HOW</p><h2>Travel well. Leave a lighter footprint.</h2>
         <p>Pack for the season, respect local customs, carry reusable essentials, check official advisories, and book with verified providers. Mountain and wildlife areas may have permit or entry rules.</p></div>
