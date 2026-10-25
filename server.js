@@ -16,6 +16,41 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
+// Reuse MongoDB connection across serverless invocations.
+let cachedMongo = global.mongoose;
+
+if (!cachedMongo) {
+  cachedMongo = global.mongoose = {
+    conn: null,
+    promise: null
+  };
+}
+
+async function connectDB() {
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
+  }
+
+  if (!process.env.MONGODB_URI) {
+    throw new Error('MONGODB_URI is not configured');
+  }
+
+  if (
+    !cachedMongo.promise ||
+    mongoose.connection.readyState === 0
+  ) {
+    cachedMongo.promise = mongoose
+      .connect(process.env.MONGODB_URI)
+      .catch((error) => {
+        cachedMongo.promise = null;
+        throw error;
+      });
+  }
+
+  cachedMongo.conn = await cachedMongo.promise;
+  return cachedMongo.conn;
+}
+
 const uploadsDir = process.env.VERCEL
   ? path.join('/tmp', 'uploads', 'videos')
   : path.join(__dirname, 'uploads', 'videos');
@@ -351,6 +386,21 @@ const upload = multer({
   }
 });
 
+// Ensure MongoDB is connected before accessing vlog APIs.
+app.use('/api/vlogs', async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error('MongoDB connection failed:', error.message);
+
+    return res.status(503).json({
+      error: 'Database temporarily unavailable.'
+    });
+  }
+});
+
+
 // -------------------- CREATE VLOG (ADMIN ONLY) --------------------
 
 app.post(
@@ -528,6 +578,8 @@ app.get('*', (req, res) => {
 
 // -------------------- START SERVER --------------------
 
+// -------------------- START SERVER --------------------
+
 async function startServer() {
   const requiredVariables = [
     'MONGODB_URI',
@@ -537,26 +589,31 @@ async function startServer() {
   ];
 
   const missing = requiredVariables.filter(
-    name => !process.env[name]
+    (name) => !process.env[name]
   );
 
   if (missing.length) {
-    console.error('Missing .env variables:', missing.join(', '));
+    console.error(
+      'Missing environment variables:',
+      missing.join(', ')
+    );
     process.exit(1);
   }
 
   if (process.env.JWT_SECRET.length < 32) {
-    console.error('JWT_SECRET must be at least 32 characters long.');
+    console.error(
+      'JWT_SECRET must be at least 32 characters long.'
+    );
     process.exit(1);
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await connectDB();
 
     console.log('MongoDB connected successfully.');
 
     app.listen(PORT, () => {
-      console.log(`Yatra AI running at http://localhost:${PORT}`);
+      console.log(`Yatra AI running on port ${PORT}`);
     });
   } catch (error) {
     console.error('MongoDB connection failed:', error.message);
@@ -564,4 +621,10 @@ async function startServer() {
   }
 }
 
-startServer();
+// Export the Express app for Vercel.
+module.exports = app;
+
+// Start a normal HTTP server only during local development.
+if (!process.env.VERCEL) {
+  startServer();
+}
