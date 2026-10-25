@@ -16,7 +16,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
-const uploadsDir = path.join(__dirname, 'uploads', 'videos');
+const uploadsDir = process.env.VERCEL
+  ? path.join('/tmp', 'uploads', 'videos')
+  : path.join(__dirname, 'uploads', 'videos');
 
 fs.mkdirSync(uploadsDir, { recursive: true });
 
